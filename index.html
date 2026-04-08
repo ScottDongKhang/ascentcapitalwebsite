@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ascent Capital</title>
-<meta name="description" content="Ascent Capital — a portfolio-native quantitative investment platform with a multi-agent operating shell. Regime-aware, self-critical, neuroplastic.">
+<meta name="description" content="Ascent Capital — a quantitative investment platform that questions its own decisions before acting on them.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
@@ -13,213 +13,218 @@
 :root{
   --gold:#C9A96E;--gold-light:#E8D5A8;--gold-dim:#8A6F44;
   --ink:#07070A;--ink-2:#0C0C0F;--surface:#101013;--surface-2:#151518;--surface-3:#1A1A1F;
-  --rule:rgba(201,169,110,0.09);--rule-b:rgba(201,169,110,0.2);--rule-c:rgba(201,169,110,0.32);
-  --text:#C4BFB4;--text-dim:#5E5A55;--text-mid:#8E8980;
-  --green:#3A9C68;--green-t:rgba(58,156,104,0.18);
+  --rule:rgba(201,169,110,0.08);--rule-b:rgba(201,169,110,0.18);--rule-c:rgba(201,169,110,0.32);
+  --text:#C2BDB2;--text-dim:#58544F;--text-mid:#8A8580;
+  --green:#3A9C68;--green-t:rgba(58,156,104,0.15);
   --serif:'Cormorant Garamond',Georgia,serif;--mono:'DM Mono',monospace;
 }
 html{scroll-behavior:smooth}
 body{background:var(--ink);color:var(--text);font-family:var(--serif);font-size:18px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-
-/* GRAIN */
-body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)'/%3E%3C/svg%3E")}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.022;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)'/%3E%3C/svg%3E")}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 4rem;background:rgba(7,7,10,0.94);backdrop-filter:blur(24px) saturate(160%);border-bottom:1px solid var(--rule)}
+nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 4rem;background:rgba(7,7,10,0.92);backdrop-filter:blur(24px) saturate(160%);border-bottom:1px solid var(--rule)}
 .nav-wm{font-family:var(--mono);font-size:9.5px;font-weight:300;letter-spacing:0.32em;color:var(--gold);text-transform:uppercase;cursor:pointer;transition:opacity 0.2s}
-.nav-wm:hover{opacity:0.75}
+.nav-wm:hover{opacity:0.7}
 .nav-links{display:flex;gap:2rem;list-style:none}
 .nav-links a{font-family:var(--mono);font-size:8px;letter-spacing:0.22em;color:var(--text-dim);text-decoration:none;text-transform:uppercase;transition:color 0.2s;cursor:pointer}
 .nav-links a:hover{color:var(--gold)}
 .nav-live{display:flex;align-items:center;gap:0.55rem;font-family:var(--mono);font-size:8px;letter-spacing:0.2em;color:var(--text-dim);text-transform:uppercase}
-.dot{width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 8px rgba(58,156,104,0.6);animation:livepulse 2.5s ease-in-out infinite}
-@keyframes livepulse{0%,100%{opacity:1;box-shadow:0 0 8px rgba(58,156,104,0.6)}50%{opacity:0.25;box-shadow:none}}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 8px rgba(58,156,104,0.5);animation:lp 2.5s ease-in-out infinite}
+@keyframes lp{0%,100%{opacity:1;box-shadow:0 0 8px rgba(58,156,104,0.5)}50%{opacity:0.2;box-shadow:none}}
 
-/* HERO */
+/* ── HERO ── */
 .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:0 4rem;padding-top:5rem;gap:5rem;position:relative;overflow:hidden}
+.hero-bg{position:fixed;inset:0;pointer-events:none;z-index:0}
+.hero-bg::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(201,169,110,0.022) 1px,transparent 1px),linear-gradient(90deg,rgba(201,169,110,0.022) 1px,transparent 1px);background-size:80px 80px;opacity:0;animation:gf 2.5s ease 0.3s forwards}
+.hero-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 70% at 75% 40%,rgba(201,169,110,0.05) 0%,transparent 65%)}
+@keyframes gf{to{opacity:1}}
 
-/* animated background grid lines */
-.hero-grid{position:absolute;inset:0;pointer-events:none;z-index:0;opacity:0;animation:gridfade 1.8s ease 0.3s forwards}
-@keyframes gridfade{to{opacity:1}}
-.hero-grid::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(201,169,110,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(201,169,110,0.03) 1px,transparent 1px);background-size:80px 80px}
-.hero-grid::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 65% 45%,rgba(201,169,110,0.06) 0%,transparent 60%),radial-gradient(ellipse 40% 50% at 10% 85%,rgba(58,156,104,0.04) 0%,transparent 70%)}
+.hero-eyebrow{font-family:var(--mono);font-size:8px;letter-spacing:0.38em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:2.2rem;display:flex;align-items:center;gap:1rem;position:relative;z-index:1;opacity:0;transform:translateY(10px);animation:up 0.7s ease 0.35s forwards}
+.hero-eyebrow::before{content:'';display:block;width:20px;height:1px;background:var(--gold-dim)}
 
-.hero-left{position:relative;z-index:1}
+/* THE HEADLINE — everything lives here */
+.hero-hl{position:relative;z-index:1;margin-bottom:3rem;opacity:0;transform:translateY(18px);animation:up 0.9s ease 0.5s forwards}
+.hero-hl h1{font-size:clamp(3.5rem,7vw,7rem);font-weight:300;line-height:0.98;letter-spacing:-0.025em;color:#EDE8DF;margin-bottom:0}
+.hero-hl h1 em{font-style:italic;color:var(--gold)}
+.hero-hl h1 .dim{color:var(--text-dim)}
+.hero-tagline{font-size:clamp(1rem,1.6vw,1.2rem);font-weight:300;color:var(--text-dim);line-height:1.88;margin-top:1.8rem}
+.hero-tagline strong{color:var(--text);font-weight:400}
 
-/* staggered entrance */
-.hero-eyebrow{font-family:var(--mono);font-size:8px;letter-spacing:0.38em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:2rem;display:flex;align-items:center;gap:1rem;opacity:0;transform:translateY(12px);animation:up 0.7s ease 0.4s forwards}
-.hero-eyebrow::before{content:'';display:block;width:22px;height:1px;background:var(--gold-dim)}
-h1{font-size:clamp(3rem,5.2vw,5.6rem);font-weight:300;line-height:1.02;letter-spacing:-0.02em;color:#EDE8DF;margin-bottom:2rem;opacity:0;transform:translateY(16px);animation:up 0.8s ease 0.55s forwards}
-h1 em{font-style:italic;color:var(--gold)}
-.hero-sub{font-size:1.02rem;font-weight:300;color:var(--text-dim);line-height:1.9;max-width:40ch;margin-bottom:2rem;opacity:0;transform:translateY(14px);animation:up 0.7s ease 0.7s forwards}
-
-/* hero stats strip */
-.hero-stats{display:flex;gap:2.5rem;margin-bottom:2.8rem;padding:1.1rem 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);opacity:0;transform:translateY(12px);animation:up 0.7s ease 0.85s forwards}
-.hstat{display:flex;flex-direction:column;gap:0.2rem}
-.hstat-val{font-size:1.3rem;font-weight:300;color:#EDE8DF;letter-spacing:-0.01em;font-family:var(--serif)}
-.hstat-val span{font-size:0.75rem;color:var(--gold-dim);margin-left:0.2rem;font-family:var(--mono)}
+/* hero bottom row */
+.hero-bottom{display:flex;align-items:center;gap:2.5rem;flex-wrap:wrap;position:relative;z-index:1;padding-top:2rem;border-top:1px solid var(--rule);opacity:0;transform:translateY(10px);animation:up 0.7s ease 0.9s forwards}
+.hero-actions{display:flex;gap:1rem}
+.btn-primary{display:inline-flex;align-items:center;gap:0.8rem;font-family:var(--mono);font-size:8px;letter-spacing:0.26em;color:var(--ink);background:var(--gold);text-transform:uppercase;border:none;padding:1rem 1.8rem;cursor:pointer;transition:background 0.2s,transform 0.15s;font-weight:400}
+.btn-primary:hover{background:var(--gold-light);transform:translateY(-1px)}
+.btn-ghost{display:inline-flex;align-items:center;gap:0.8rem;font-family:var(--mono);font-size:8px;letter-spacing:0.26em;color:var(--gold);text-transform:uppercase;border:1px solid var(--rule-b);padding:1rem 1.8rem;cursor:pointer;transition:all 0.2s;background:transparent}
+.btn-ghost:hover{background:rgba(201,169,110,0.05);border-color:var(--rule-c)}
+.hero-status{display:flex;align-items:center;gap:2rem;flex-wrap:wrap}
+.hstat{display:flex;flex-direction:column;gap:0.15rem}
+.hstat-val{font-family:var(--mono);font-size:11px;color:var(--text-mid);letter-spacing:0.08em}
 .hstat-label{font-family:var(--mono);font-size:7px;letter-spacing:0.2em;color:var(--text-dim);text-transform:uppercase}
 
-.hero-actions{display:flex;align-items:center;gap:1.4rem;flex-wrap:wrap;opacity:0;transform:translateY(10px);animation:up 0.7s ease 1s forwards}
-.btn-primary{display:inline-flex;align-items:center;gap:0.8rem;font-family:var(--mono);font-size:8px;letter-spacing:0.26em;color:var(--ink);background:var(--gold);text-transform:uppercase;border:none;padding:1.05rem 2rem;cursor:pointer;transition:background 0.2s,transform 0.15s;font-weight:400}
-.btn-primary:hover{background:var(--gold-light);transform:translateY(-1px)}
-.btn-ghost{display:inline-flex;align-items:center;gap:0.8rem;font-family:var(--mono);font-size:8px;letter-spacing:0.26em;color:var(--gold);text-transform:uppercase;border:1px solid var(--rule-b);padding:1.05rem 2rem;cursor:pointer;transition:all 0.2s;background:transparent}
-.btn-ghost:hover{background:rgba(201,169,110,0.05);border-color:var(--rule-c)}
-
+.hero-left{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:center}
+.hero-right{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:center;gap:1px;opacity:0;transform:translateX(16px);animation:fromr 0.9s ease 0.7s forwards}
+@keyframes fromr{to{opacity:1;transform:translateX(0)}}
+.hero-card{background:var(--surface);border:1px solid var(--rule-b);padding:1.6rem 1.8rem;position:relative;overflow:hidden;transition:background 0.2s}
+.hero-card:hover{background:var(--surface-2)}
+.hero-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);opacity:0;transition:opacity 0.25s}
+.hero-card:hover::before{opacity:1}
+.hc-label{font-family:var(--mono);font-size:7.5px;letter-spacing:0.24em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:0.6rem}
+.hc-val{font-size:1.1rem;font-weight:300;color:#EDE8DF;line-height:1.25;margin-bottom:0.3rem;letter-spacing:-0.005em}
+.hc-val em{font-style:italic;color:var(--gold)}
+.hc-sub{font-family:var(--mono);font-size:7.5px;letter-spacing:0.12em;color:var(--text-dim);line-height:1.6}
+.hero-card-stack{display:flex;flex-direction:column;gap:1px;border:1px solid var(--rule-b);margin-bottom:1px}
 @keyframes up{to{opacity:1;transform:translateY(0)}}
 
-/* SYSTEM CARD */
-.hero-right{position:relative;z-index:1;opacity:0;transform:translateX(20px);animation:fromright 0.9s ease 0.6s forwards}
-@keyframes fromright{to{opacity:1;transform:translateX(0)}}
-.system-card{border:1px solid var(--rule-b);background:linear-gradient(150deg,var(--surface) 0%,var(--surface-2) 100%);position:relative;overflow:hidden}
-.system-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent 0%,var(--gold-dim) 40%,var(--gold-dim) 60%,transparent 100%)}
-.sc-head{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 1.6rem;border-bottom:1px solid var(--rule)}
-.sc-title{font-family:var(--mono);font-size:8px;letter-spacing:0.26em;color:var(--gold-dim);text-transform:uppercase}
-.sc-badge{font-family:var(--mono);font-size:7px;letter-spacing:0.18em;color:var(--green);border:1px solid var(--green-t);padding:0.18rem 0.55rem;text-transform:uppercase;background:var(--green-t)}
-.layer-stack{display:flex;flex-direction:column}
-.lr{display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:0.85rem;padding:0.55rem 1.1rem;border-left:2px solid transparent;transition:all 0.16s;cursor:pointer}
-.lr:hover{background:rgba(201,169,110,0.025);border-left-color:rgba(201,169,110,0.15)}
-.lr.open{background:rgba(201,169,110,0.04);border-left-color:var(--gold-dim)}
-.lr-n{font-family:var(--mono);font-size:7px;color:var(--text-dim)}
-.lr-name{font-size:0.82rem;font-weight:400;color:var(--text)}
-.lr-b{font-family:var(--mono);font-size:6px;letter-spacing:0.15em;text-transform:uppercase;padding:0.18rem 0.48rem;flex-shrink:0}
-.live{color:var(--green);border:1px solid var(--green-t);background:var(--green-t)}
-.bld{color:var(--gold-dim);border:1px solid var(--rule)}
-.drawer{overflow:hidden;max-height:0;transition:max-height 0.35s ease;background:var(--ink-2);border-left:2px solid var(--gold-dim)}
-.drawer.open{max-height:180px}
-.di{padding:0.85rem 1.1rem 1rem}
-.di-lbl{font-family:var(--mono);font-size:7.5px;letter-spacing:0.2em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:0.4rem}
-.di-txt{font-size:0.81rem;font-weight:300;color:var(--text-dim);line-height:1.68}
-.di-txt strong{color:var(--text);font-weight:400}
-
-/* DIVIDERS */
+/* ── DIVIDERS ── */
 .hr{height:1px;background:linear-gradient(90deg,transparent,var(--rule-b) 15%,var(--rule-b) 85%,transparent);margin:0 4rem}
 
-/* SECTIONS */
-section{padding:6rem 4rem;position:relative;z-index:1}
+/* ── SECTIONS ── */
+section{padding:5.5rem 4rem;position:relative;z-index:1}
 .slabel{font-family:var(--mono);font-size:8px;letter-spacing:0.32em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:3rem;display:flex;align-items:center;gap:1rem}
 .slabel::after{content:'';display:block;width:36px;height:1px;background:var(--rule-c)}
 
-/* OVERVIEW */
-.overview-grid{display:grid;grid-template-columns:1fr 1.6fr;gap:6rem;align-items:start}
-.overview-h2{font-size:clamp(2rem,3vw,2.9rem);font-weight:300;line-height:1.17;color:#EDE8DF;letter-spacing:-0.015em}
-.overview-h2 em{font-style:italic;color:var(--gold)}
-.overview-body p{font-size:0.97rem;font-weight:300;color:var(--text-dim);line-height:1.94}
-.overview-body p+p{margin-top:1.2rem}
-.overview-body strong{color:var(--text);font-weight:400}
-.bq{margin:2rem 0 0;border-left:2px solid var(--gold-dim);padding-left:1.3rem;font-size:0.93rem;font-style:italic;color:var(--text-mid);line-height:1.72}
+/* ── WHAT IT IS ── */
+.what-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule-b);border:1px solid var(--rule-b)}
+.what-card{background:var(--surface);padding:2.8rem 2.4rem;position:relative;overflow:hidden;transition:background 0.2s}
+.what-card:hover{background:var(--surface-2)}
+.what-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold-dim),transparent);opacity:0;transition:opacity 0.25s}
+.what-card:hover::after{opacity:1}
+.wc-n{font-family:var(--mono);font-size:9px;letter-spacing:0.2em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:1.2rem}
+.wc-h{font-size:1.5rem;font-weight:300;color:#EDE8DF;line-height:1.25;margin-bottom:1rem;letter-spacing:-0.01em}
+.wc-h em{font-style:italic;color:var(--gold)}
+.wc-p{font-size:0.93rem;font-weight:300;color:var(--text-dim);line-height:1.88}
+.wc-p strong{color:var(--text);font-weight:400}
 
-/* CAPABILITIES — card grid */
-.caps-section{background:var(--surface)}
-.caps-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule-b);border:1px solid var(--rule-b);position:relative;z-index:1}
-.cap-card{background:var(--ink-2);padding:2rem 2rem 0;cursor:pointer;border:2px solid transparent;transition:background 0.2s;position:relative;overflow:hidden}
-.cap-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold-dim),transparent);opacity:0;transition:opacity 0.25s}
-.cap-card.open::before,.cap-card:hover::before{opacity:1}
-.cap-card.open{background:var(--surface-2)}
-.cap-card-head{display:flex;align-items:flex-start;justify-content:space-between;padding-bottom:1.5rem;gap:1rem}
-.cap-n{font-family:var(--mono);font-size:32px;font-weight:300;color:rgba(201,169,110,0.12);line-height:1;letter-spacing:-0.02em;margin-bottom:0.5rem}
-.cap-t{font-size:1.08rem;font-weight:400;color:#EDE8DF;line-height:1.3;margin-bottom:0.4rem}
-.cap-tag{font-family:var(--mono);font-size:7px;letter-spacing:0.14em;color:var(--text-dim);border:1px solid var(--rule-b);padding:0.14rem 0.5rem;text-transform:uppercase;flex-shrink:0}
-.cap-chev{font-family:var(--mono);font-size:16px;color:var(--gold-dim);transition:transform 0.3s;flex-shrink:0;margin-top:0.3rem;line-height:1}
-.cap-card.open .cap-chev{transform:rotate(180deg)}
-.cap-body{max-height:0;overflow:hidden;transition:max-height 0.42s ease}
-.cap-card.open .cap-body{max-height:400px}
-.cap-inner{padding-bottom:2rem}
-.cap-inner p{font-size:0.92rem;font-weight:300;color:var(--text-dim);line-height:1.88;padding-top:0.8rem;border-top:1px solid var(--rule)}
-.cap-inner strong{color:var(--text);font-weight:400}
-.kv-set{margin-top:1.1rem;display:flex;flex-direction:column}
-.kv{display:grid;grid-template-columns:110px 1fr;gap:0.8rem;font-size:0.84rem;border-top:1px solid var(--rule);padding:0.45rem 0}
-.kv-k{font-family:var(--mono);font-size:7px;letter-spacing:0.16em;color:var(--gold-dim);text-transform:uppercase;padding-top:0.12rem}
-.kv-v{font-weight:300;color:var(--text-dim)}
-.kv-v strong{color:var(--text);font-weight:400}
-
-/* DEBATE */
+/* ── DEBATE ── */
 .debate-section{background:var(--ink-2)}
-.debate-lede{font-size:clamp(1.3rem,2.5vw,2rem);font-weight:300;font-style:italic;color:var(--gold-light);line-height:1.38;max-width:24ch;margin-bottom:3rem;letter-spacing:-0.01em}
+.debate-hero{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start;margin-bottom:4.5rem}
+.debate-hero-q{font-size:clamp(2rem,3.8vw,3.5rem);font-weight:300;line-height:1.1;color:#EDE8DF;letter-spacing:-0.02em;margin-bottom:1.8rem}
+.debate-hero-q em{font-style:italic;color:var(--gold)}
+.debate-hero-p{font-size:0.97rem;font-weight:300;color:var(--text-dim);line-height:1.92}
+.debate-hero-p+.debate-hero-p{margin-top:1rem}
+.debate-hero-p strong{color:var(--text);font-weight:400}
+
+/* AGENT GRID */
 .agents-row{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--rule-b);border:1px solid var(--rule-b)}
-.ac{background:var(--surface);padding:1.6rem 1rem 1.4rem;text-align:center;cursor:pointer;transition:background 0.2s;border:2px solid transparent;position:relative}
+.ac{background:var(--surface);padding:1.8rem 1rem 1.5rem;text-align:center;cursor:pointer;transition:background 0.2s;border:2px solid transparent;position:relative}
 .ac::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:0;height:2px;background:var(--gold);transition:width 0.25s ease}
 .ac:hover{background:var(--surface-2)}
 .ac.sel{background:var(--surface-3);border-color:var(--gold-dim)}
-.ac.sel::after{width:55%}
-.ag-g{font-size:1.2rem;display:block;margin-bottom:0.65rem;color:var(--gold-dim);transition:color 0.2s}
+.ac.sel::after{width:60%}
+.ag-g{font-size:1.3rem;display:block;margin-bottom:0.7rem;color:var(--gold-dim);transition:color 0.2s}
 .ac.sel .ag-g{color:var(--gold)}
-.ag-n{font-size:0.85rem;font-weight:400;color:var(--text);margin-bottom:0.28rem}
-.ag-r{font-family:var(--mono);font-size:7px;letter-spacing:0.1em;color:var(--text-dim);text-transform:uppercase;line-height:1.55}
-.ag-h{font-family:var(--mono);font-size:6.5px;color:var(--gold-dim);letter-spacing:0.1em;text-transform:uppercase;margin-top:0.55rem;opacity:0.55}
-.agent-panel{background:var(--surface);overflow:hidden;max-height:0;transition:max-height 0.4s ease;border:1px solid var(--rule-b);border-top:none}
-.agent-panel.open{max-height:380px;border-color:var(--gold-dim)}
-.ap-in{padding:1.8rem 2rem}
-.ap-head{display:flex;align-items:center;gap:1rem;margin-bottom:0.9rem;padding-bottom:0.9rem;border-bottom:1px solid var(--rule)}
-.ap-g{font-size:1.7rem;color:var(--gold)}
-.ap-name{font-size:1.18rem;font-weight:400;color:var(--gold-light);margin-bottom:0.1rem}
+.ag-n{font-size:0.88rem;font-weight:400;color:var(--text);margin-bottom:0.3rem}
+.ag-r{font-family:var(--mono);font-size:7px;letter-spacing:0.1em;color:var(--text-dim);text-transform:uppercase;line-height:1.6}
+.ag-h{font-family:var(--mono);font-size:6px;color:var(--gold-dim);letter-spacing:0.12em;text-transform:uppercase;margin-top:0.6rem;opacity:0.5}
+.agent-panel{background:var(--surface);overflow:hidden;max-height:0;transition:max-height 0.42s ease;border:1px solid var(--rule-b);border-top:none}
+.agent-panel.open{max-height:400px;border-color:var(--gold-dim)}
+.ap-in{padding:2rem 2.2rem}
+.ap-head{display:flex;align-items:center;gap:1.1rem;margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid var(--rule)}
+.ap-g{font-size:1.8rem;color:var(--gold)}
+.ap-name{font-size:1.2rem;font-weight:400;color:var(--gold-light);margin-bottom:0.1rem}
 .ap-sub{font-family:var(--mono);font-size:7.5px;letter-spacing:0.2em;color:var(--text-dim);text-transform:uppercase}
-.ap-body{font-size:0.9rem;font-weight:300;color:var(--text-dim);line-height:1.85}
+.ap-body{font-size:0.92rem;font-weight:300;color:var(--text-dim);line-height:1.88}
 .ap-body strong{color:var(--text);font-weight:400}
-.ap-qs{margin-top:1rem;background:var(--ink-2);padding:0.9rem 1.1rem;border-left:2px solid var(--gold-dim)}
-.ap-qs-lbl{font-family:var(--mono);font-size:7.5px;letter-spacing:0.2em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:0.45rem}
-.ap-qs ul{list-style:none;display:flex;flex-direction:column;gap:0.28rem}
-.ap-qs li{font-size:0.85rem;font-weight:300;color:var(--text-dim);padding-left:1.1rem;position:relative}
+.ap-qs{margin-top:1.1rem;background:var(--ink-2);padding:1rem 1.2rem;border-left:2px solid var(--gold-dim)}
+.ap-qs-lbl{font-family:var(--mono);font-size:7.5px;letter-spacing:0.2em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:0.5rem}
+.ap-qs ul{list-style:none;display:flex;flex-direction:column;gap:0.3rem}
+.ap-qs li{font-size:0.86rem;font-weight:300;color:var(--text-dim);padding-left:1.1rem;position:relative}
 .ap-qs li::before{content:"—";position:absolute;left:0;color:var(--gold-dim)}
-.verdict-row{border:1px solid var(--rule-b);border-top:none;padding:0.9rem 1.4rem;display:flex;align-items:center;gap:1.4rem;background:var(--surface-2)}
+.verdict-row{border:1px solid var(--rule-b);border-top:none;padding:1rem 1.5rem;display:flex;align-items:center;gap:1.5rem;background:var(--surface-2)}
 .vl{font-family:var(--mono);font-size:8px;letter-spacing:0.2em;color:var(--text-dim);text-transform:uppercase;flex-shrink:0}
-.vp{display:flex;gap:0.45rem}
-.vpill{font-family:var(--mono);font-size:7px;letter-spacing:0.1em;padding:0.26rem 0.68rem;border:1px solid var(--rule-b);color:var(--text-dim);text-transform:uppercase}
+.vp{display:flex;gap:0.5rem}
+.vpill{font-family:var(--mono);font-size:7px;letter-spacing:0.1em;padding:0.28rem 0.7rem;border:1px solid var(--rule-b);color:var(--text-dim);text-transform:uppercase}
 .vpill.on{border-color:var(--gold-dim);color:var(--gold);background:rgba(201,169,110,0.07)}
 
-/* NEURO */
+/* ── NEURO ── */
 .neuro-section{background:var(--surface)}
-.neuro-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
-.neuro-h2{font-size:clamp(1.9rem,2.9vw,2.8rem);font-weight:300;color:#EDE8DF;line-height:1.1;margin-bottom:1.8rem;letter-spacing:-0.015em}
-.neuro-h2 em{font-style:italic;color:var(--gold)}
-.neuro-body p{font-size:0.97rem;font-weight:300;color:var(--text-dim);line-height:1.92}
-.neuro-body p+p{margin-top:1.1rem}
-.neuro-body strong{color:var(--text);font-weight:400}
+.neuro-hero{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start;margin-bottom:4.5rem}
+.neuro-hero-q{font-size:clamp(2rem,3.8vw,3.5rem);font-weight:300;line-height:1.1;color:#EDE8DF;letter-spacing:-0.02em;margin-bottom:1.8rem}
+.neuro-hero-q em{font-style:italic;color:var(--gold)}
+.neuro-hero-p{font-size:0.97rem;font-weight:300;color:var(--text-dim);line-height:1.92}
+.neuro-hero-p+.neuro-hero-p{margin-top:1rem}
+.neuro-hero-p strong{color:var(--text);font-weight:400}
+
+/* PRINCIPLES */
+.principles{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule-b);border:1px solid var(--rule-b);margin-bottom:3rem}
+.pr{background:var(--ink-2);padding:2rem 1.8rem;transition:background 0.2s;position:relative}
+.pr:hover{background:var(--surface-2)}
+.pr::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--gold-dim),transparent);opacity:0;transition:opacity 0.25s}
+.pr:hover::before{opacity:1}
+.pr-n{font-family:var(--mono);font-size:9px;letter-spacing:0.2em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:1rem}
+.pr-t{font-size:1.1rem;font-weight:400;color:#EDE8DF;margin-bottom:0.6rem;line-height:1.3}
+.pr-d{font-size:0.88rem;font-weight:300;color:var(--text-dim);line-height:1.82}
+
+/* LOOP TABLE */
 .loop-lbl{font-family:var(--mono);font-size:8px;letter-spacing:0.24em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:0.8rem}
-.loop-tbl{border:1px solid var(--rule-b);width:100%;overflow:hidden;position:relative}
-.loop-tbl::before{content:'';display:block;height:2px;background:linear-gradient(90deg,var(--gold-dim) 0%,rgba(201,169,110,0.2) 60%,transparent 100%)}
-.loop-r{display:grid;grid-template-columns:84px 1fr;border-bottom:1px solid var(--rule)}
+.loop-tbl{border:1px solid var(--rule-b);width:100%;overflow:hidden}
+.loop-tbl::before{content:'';display:block;height:2px;background:linear-gradient(90deg,var(--gold-dim),rgba(201,169,110,0.15) 60%,transparent)}
+.loop-r{display:grid;grid-template-columns:90px 1fr;border-bottom:1px solid var(--rule)}
 .loop-r:last-child{border-bottom:none}
-.loop-t{font-family:var(--mono);font-size:7.5px;letter-spacing:0.07em;color:var(--gold-dim);padding:0.72rem 0.85rem;border-right:1px solid var(--rule);display:flex;align-items:center}
-.loop-a{font-size:0.83rem;font-weight:300;color:var(--text-dim);padding:0.72rem 1rem;line-height:1.52}
+.loop-t{font-family:var(--mono);font-size:7.5px;color:var(--gold-dim);padding:0.75rem 0.9rem;border-right:1px solid var(--rule);display:flex;align-items:center}
+.loop-a{font-size:0.84rem;font-weight:300;color:var(--text-dim);padding:0.75rem 1.1rem;line-height:1.55}
 .loop-a strong{color:var(--text);font-weight:400}
 
-/* FOUNDERS */
-.founders-section{background:var(--ink-2)}
-.founders-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule-b);border:1px solid var(--rule-b);max-width:860px}
-.fc{background:var(--surface);padding:2.4rem 2.2rem;position:relative;overflow:hidden;transition:background 0.22s;cursor:default}
+/* ── LAYERS (TECHNICAL) ── */
+.layers-section{background:var(--ink-2)}
+.layers-intro{font-size:0.97rem;font-weight:300;color:var(--text-dim);max-width:55ch;line-height:1.92;margin-bottom:3rem}
+.layers-intro strong{color:var(--text);font-weight:400}
+.layer-stack{display:flex;flex-direction:column;border:1px solid var(--rule-b)}
+.lr{display:grid;grid-template-columns:32px 1fr auto;align-items:center;gap:1rem;padding:0.7rem 1.2rem;border-left:2px solid transparent;border-bottom:1px solid var(--rule);transition:all 0.16s;cursor:pointer}
+.lr:last-of-type{border-bottom:none}
+.lr:hover{background:rgba(201,169,110,0.025);border-left-color:rgba(201,169,110,0.2)}
+.lr.open{background:rgba(201,169,110,0.04);border-left-color:var(--gold-dim)}
+.lr-n{font-family:var(--mono);font-size:7px;color:var(--text-dim)}
+.lr-name{font-size:0.84rem;font-weight:400;color:var(--text)}
+.lr-b{font-family:var(--mono);font-size:6.5px;letter-spacing:0.15em;text-transform:uppercase;padding:0.18rem 0.5rem;flex-shrink:0}
+.live{color:var(--green);border:1px solid var(--green-t);background:var(--green-t)}
+.bld{color:var(--gold-dim);border:1px solid var(--rule-b)}
+.drawer{overflow:hidden;max-height:0;transition:max-height 0.35s ease;background:var(--surface);border-left:2px solid var(--gold-dim);border-bottom:1px solid var(--rule)}
+.drawer:last-child{border-bottom:none}
+.drawer.open{max-height:180px}
+.di{padding:0.9rem 1.2rem 1.1rem}
+.di-txt{font-size:0.83rem;font-weight:300;color:var(--text-dim);line-height:1.72}
+.di-txt strong{color:var(--text);font-weight:400}
+
+/* ── FOUNDERS ── */
+.founders-section{background:var(--ink)}
+.founders-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule-b);border:1px solid var(--rule-b);max-width:820px}
+.fc{background:var(--surface);padding:2.6rem 2.4rem;position:relative;overflow:hidden;transition:background 0.22s}
 .fc::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--gold-dim),transparent);opacity:0;transition:opacity 0.25s}
 .fc:hover{background:var(--surface-2)}
 .fc:hover::after{opacity:1}
-.fc-role{font-family:var(--mono);font-size:7.5px;letter-spacing:0.24em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:1rem}
-.fc-name{font-size:1.9rem;font-weight:300;color:#EDE8DF;letter-spacing:-0.01em;line-height:1.1;margin-bottom:0.8rem}
+.fc-role{font-family:var(--mono);font-size:7.5px;letter-spacing:0.26em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:1rem}
+.fc-name{font-size:2rem;font-weight:300;color:#EDE8DF;letter-spacing:-0.01em;line-height:1.08;margin-bottom:0.9rem}
 .fc-school{font-family:var(--mono);font-size:7px;letter-spacing:0.18em;color:var(--text-dim);text-transform:uppercase}
 
-/* FOOTER */
+/* ── FOOTER ── */
 footer{background:var(--ink);border-top:1px solid var(--rule);padding:2.8rem 4rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;position:relative;z-index:1}
 .f-wm{font-family:var(--mono);font-size:9px;letter-spacing:0.32em;color:var(--gold-dim);text-transform:uppercase}
 .f-meta{display:flex;gap:2rem;flex-wrap:wrap}
 .f-meta span{font-family:var(--mono);font-size:7.5px;letter-spacing:0.13em;color:var(--text-dim);text-transform:uppercase}
-.f-meta span b{color:var(--text-mid);font-weight:400;margin-right:0.35rem}
+.f-meta b{color:var(--text-mid);font-weight:400;margin-right:0.3rem}
 .f-disc{font-family:var(--mono);font-size:7px;letter-spacing:0.1em;color:var(--text-dim);text-transform:uppercase;line-height:1.7;text-align:right;max-width:30ch}
 
-/* FADE-IN SCROLL */
+/* FADE */
 .fade-up{opacity:0;transform:translateY(18px);transition:opacity 0.65s ease,transform 0.65s ease}
 .fade-up.in{opacity:1;transform:translateY(0)}
-.d1{transition-delay:0.08s}.d2{transition-delay:0.16s}.d3{transition-delay:0.24s}
+.d1{transition-delay:0.1s}.d2{transition-delay:0.2s}.d3{transition-delay:0.3s}
 
 /* RESPONSIVE */
 @media(max-width:960px){
   nav{padding:1rem 1.4rem}
   .nav-links,.nav-live{display:none}
-  .hero{grid-template-columns:1fr;padding:1.4rem;padding-top:5rem;gap:2.5rem;min-height:auto;padding-bottom:3.5rem}
-  .hero-stats{gap:1.5rem}
-  section{padding:4rem 1.4rem}
+  .hero{grid-template-columns:1fr;padding:1.4rem;padding-top:5rem;min-height:auto;padding-bottom:3rem}
+  section{padding:4.5rem 1.4rem}
   .hr{margin:0 1.4rem}
-  .overview-grid,.neuro-grid{grid-template-columns:1fr;gap:3rem}
-  .caps-grid{grid-template-columns:1fr}
+  .what-grid{grid-template-columns:1fr}
+  .debate-hero,.neuro-hero{grid-template-columns:1fr;gap:2.5rem}
   .agents-row{grid-template-columns:repeat(3,1fr)}
+  .principles{grid-template-columns:1fr}
   .founders-grid{grid-template-columns:1fr;max-width:none}
+  .hero-bottom{gap:1.5rem}
   footer{flex-direction:column;align-items:flex-start;gap:1.5rem;padding:2rem 1.4rem}
   .f-disc{text-align:left;max-width:none}
 }
@@ -230,192 +235,93 @@ footer{background:var(--ink);border-top:1px solid var(--rule);padding:2.8rem 4re
 <nav>
   <span class="nav-wm" onclick="window.scrollTo({top:0,behavior:'smooth'})">Ascent Capital</span>
   <ul class="nav-links">
-    <li><a onclick="navTo('overview')">Overview</a></li>
-    <li><a onclick="navTo('capabilities')">Capabilities</a></li>
-    <li><a onclick="navTo('debate')">Debate Layer</a></li>
-    <li><a onclick="navTo('neuroplasticity')">Neuroplasticity</a></li>
+    <li><a onclick="navTo('what')">What it is</a></li>
+    <li><a onclick="navTo('debate')">Debate layer</a></li>
+    <li><a onclick="navTo('neuroplasticity')">How it learns</a></li>
+    <li><a onclick="navTo('layers')">Architecture</a></li>
     <li><a onclick="navTo('founders')">Team</a></li>
   </ul>
   <div class="nav-live"><div class="dot"></div>Paper trading live</div>
 </nav>
 
-<!-- HERO -->
+<!-- ══ HERO ══ -->
 <section class="hero">
-  <div class="hero-grid"></div>
+  <div class="hero-bg"></div>
 
   <div class="hero-left">
-    <div class="hero-eyebrow">Quantitative Systematic Platform &middot; Est. 2025</div>
-    <h1>Markets run<br>on <em>signal.</em><br>We find it.</h1>
-    <p class="hero-sub">A portfolio-native quantitative platform with a multi-agent operating shell — regime-aware, self-critical, and designed to rewire its own architecture when it is wrong.</p>
+    <div class="hero-eyebrow">Quantitative Research Platform &middot; Est. 2025</div>
 
-    <div class="hero-stats">
-      <div class="hstat">
-        <div class="hstat-val">11<span>layers</span></div>
-        <div class="hstat-label">System depth</div>
-      </div>
-      <div class="hstat">
-        <div class="hstat-val">41<span>days</span></div>
-        <div class="hstat-label">Built from zero</div>
-      </div>
-      <div class="hstat">
-        <div class="hstat-val">4<span>desks</span></div>
-        <div class="hstat-label">Asset coverage</div>
-      </div>
-      <div class="hstat">
-        <div class="hstat-val">5<span>voices</span></div>
-        <div class="hstat-label">Pre-trade debate</div>
-      </div>
+    <div class="hero-hl">
+      <h1>We built a fund<br>that <em>argues</em> with<br><span class="dim">itself.</span></h1>
+      <p class="hero-tagline">
+        A quantitative investment platform with one constraint we refused to drop: it has to <strong>question its own decisions</strong> before acting on them &mdash; and rewrite its own logic when it keeps getting something wrong.
+      </p>
     </div>
 
-    <div class="hero-actions">
-      <button class="btn-primary" onclick="navTo('capabilities')">
-        Explore the system
-        <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><line x1="1" y1="5" x2="9" y2="5" stroke="currentColor" stroke-width="1.3"/><polyline points="6,2 9,5 6,8" stroke="currentColor" stroke-width="1.3" fill="none"/></svg>
-      </button>
-      <button class="btn-ghost" onclick="navTo('founders')">Meet the team</button>
+    <div class="hero-bottom">
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="navTo('debate')">
+          See how it thinks
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><line x1="1" y1="5" x2="9" y2="5" stroke="currentColor" stroke-width="1.3"/><polyline points="6,2 9,5 6,8" stroke="currentColor" stroke-width="1.3" fill="none"/></svg>
+        </button>
+        <button class="btn-ghost" onclick="navTo('neuroplasticity')">How it learns</button>
+      </div>
     </div>
   </div>
 
   <div class="hero-right">
-    <div class="system-card">
-      <div class="sc-head">
-        <span class="sc-title">System layers &mdash; click to expand</span>
-        <span class="sc-badge">April 2026</span>
-      </div>
-      <div class="layer-stack">
-        <div class="lr" onclick="toggleLayer(this,'11')"><span class="lr-n">L11</span><span class="lr-name">Hypothesis Memory (R2R)</span><span class="lr-b bld">Building</span></div>
-        <div class="drawer" id="ld-11"><div class="di"><div class="di-lbl">Institutional memory of its own evolution</div><div class="di-txt">Every hypothesis — proposed, tested, promoted, or rejected — stored permanently with its full causal chain. The system can explain why it is built the way it is: not as an algorithm description, but as a <strong>chain of decisions going back to inception.</strong></div></div></div>
-
-        <div class="lr" onclick="toggleLayer(this,'10')"><span class="lr-n">L10</span><span class="lr-name">Hypothesis Engine</span><span class="lr-b bld">Building</span></div>
-        <div class="drawer" id="ld-10"><div class="di"><div class="di-lbl">Failure → architectural proposal</div><div class="di-txt">Failure mode appears 3+ times → engine generates testable structural change → shadow-tests against live system for 63 days → promotes only if the edge holds. <strong>Thresholds scale with risk.</strong></div></div></div>
-
-        <div class="lr" onclick="toggleLayer(this,'9')"><span class="lr-n">L9</span><span class="lr-name">Debate + Blind Spot Detector</span><span class="lr-b live">Live</span></div>
-        <div class="drawer" id="ld-9"><div class="di"><div class="di-lbl">Pre-trade structured criticism</div><div class="di-txt">Five voices argue the proposed book before every rebalance. Judge returns proceed, reduce_size, or halt. The <strong>blind spot detector</strong> scans all past verdicts and injects recurring failure modes as permanent context into every future debate.</div></div></div>
-
-        <div class="lr" onclick="toggleLayer(this,'8')"><span class="lr-n">L8</span><span class="lr-name">Multi-Agent Orchestrator</span><span class="lr-b live">Live</span></div>
-        <div class="drawer" id="ld-8"><div class="di"><div class="di-lbl">Capital as a top-down decision</div><div class="di-txt">Merges all four desk outputs. In stressed or crisis regimes, <strong>tilts capital away from equities toward macro and alternatives.</strong> Conviction overlap — when desks align, sizing reflects that agreement.</div></div></div>
-
-        <div class="lr" onclick="toggleLayer(this,'7')"><span class="lr-n">L7</span><span class="lr-name">Specialist Desks (US / Macro / Intl / Alt)</span><span class="lr-b live">Live</span></div>
-        <div class="drawer" id="ld-7"><div class="di"><div class="di-lbl">Four-desk architecture</div><div class="di-txt"><strong>US Equities:</strong> full research pipeline. <strong>Macro:</strong> Treasuries, gold, dollar, credit. <strong>International:</strong> developed + EM ETFs with regional constraints. <strong>Alternatives:</strong> real assets, infrastructure, vol-adjacent with its own risk-throttle.</div></div></div>
-
-        <div class="lr" onclick="toggleLayer(this,'5')"><span class="lr-n">L5&ndash;6</span><span class="lr-name">Execution + Kill Switch (Alpaca)</span><span class="lr-b live">Live</span></div>
-        <div class="drawer" id="ld-5"><div class="di"><div class="di-lbl">Automated daily routine</div><div class="di-txt">Checks rebalance calendar, reads Alpaca positions and portfolio value, computes orders, checks the <strong>kill switch</strong> (drawdown-triggered), submits. Launchd scheduling — automated daily, not manual.</div></div></div>
-
-        <div class="lr" onclick="toggleLayer(this,'4')"><span class="lr-n">L4</span><span class="lr-name">Regime Engine + Posture Layer</span><span class="lr-b live">Live</span></div>
-        <div class="drawer" id="ld-4"><div class="di"><div class="di-lbl">Five-state market inference</div><div class="di-txt">Hidden Markov Models + volatility clustering across <strong>calm_bull, euphoric, stressed, crisis, uncertain.</strong> Posture layer translates latent states into operational language: constructive, selective, defensive.</div></div></div>
-
-        <div class="lr" onclick="toggleLayer(this,'3')"><span class="lr-n">L3</span><span class="lr-name">Portfolio Construction + Overlays</span><span class="lr-b live">Live</span></div>
-        <div class="drawer" id="ld-3"><div class="di"><div class="di-lbl">Portfolio-native from the start</div><div class="di-txt">Sector-constrained rank weighting, min/max bounds, concentration limits. <strong>SPY 200-day overlay scales gross exposure down 30%</strong> in structurally weak tape. Daily + holdings ledgers written on every run.</div></div></div>
-
-        <div class="lr" onclick="toggleLayer(this,'2')"><span class="lr-n">L2</span><span class="lr-name">Alpha Sleeves (Trend / Stat-Arb / ML)</span><span class="lr-b live">Live</span></div>
-        <div class="drawer" id="ld-2"><div class="di"><div class="di-lbl">A portfolio of falsifiable beliefs</div><div class="di-txt"><strong>Trend:</strong> momentum persists cross-sectionally. <strong>Stat-arb:</strong> sector residuals mean-revert. <strong>ML:</strong> XGBoost on forward-return targets. Each sleeve carries an explicit belief the system can test — and reject.</div></div></div>
-
-        <div class="lr" onclick="toggleLayer(this,'1')"><span class="lr-n">L1</span><span class="lr-name">Data Layer + Feature Engineering</span><span class="lr-b live">Live</span></div>
-        <div class="drawer" id="ld-1"><div class="di"><div class="di-lbl">Research-grade infrastructure</div><div class="di-txt">Yahoo Finance + FRED, parquet-cached with point-in-time joins. Momentum, volatility, RSI, MACD, z-scores, macro level and change features. <strong>Historical universe logic</strong> changes the tradable universe through time — survivorship bias is a known mistake, not an oversight.</div></div></div>
-      </div>
+    <div class="hero-card" style="margin-bottom:1px">
+      <div class="hc-label">What makes it different</div>
+      <div class="hc-val">It <em>argues</em> before it acts</div>
+      <div class="hc-sub">Five agents debate every proposed trade. A judge issues the verdict. No verdict &mdash; no trade.</div>
+    </div>
+    <div class="hero-card" style="margin-bottom:1px">
+      <div class="hc-label">What makes it rare</div>
+      <div class="hc-val">It rewrites its own logic</div>
+      <div class="hc-sub">When it keeps getting something wrong, the system proposes a structural change, tests it in parallel, and only integrates it if the evidence supports it.</div>
+    </div>
+    <div class="hero-card" style="margin-bottom:1px">
+      <div class="hc-label">Current status</div>
+      <div class="hc-val">Live &mdash; paper trading</div>
+      <div class="hc-sub">Running daily on an automated schedule. Every decision logged. Every verdict recorded.</div>
+    </div>
+    <div class="hero-card">
+      <div class="hc-label">Coverage</div>
+      <div class="hc-val">Four desks</div>
+      <div class="hc-sub">US equities &middot; Macro &middot; International &middot; Alternatives</div>
     </div>
   </div>
 </section>
 
 <div class="hr"></div>
 
-<!-- OVERVIEW -->
-<section id="overview">
-  <div class="slabel">What Ascent Is</div>
-  <div class="overview-grid fade-up">
-    <div>
-      <h2 class="overview-h2">Not a model.<br>A <em>layered</em><br>decision system.</h2>
-    </div>
-    <div class="overview-body">
-      <p>Most quant systems treat signal generation as the whole problem. Ascent does not. Signal generation is one layer in a larger process built around an investment-firm workflow: data in, a desk forms an opinion, a portfolio is constructed, the book is reviewed, risk is checked, execution places the trades, the result is logged.</p>
-      <p>That structure gives Ascent three things: it can evolve without rewriting everything; it creates a real audit trail because each layer has a narrower job; and it is <strong>portfolio-native</strong> — asking not just "what do we buy?" but how much capital each desk deserves given current regime, conviction, and diversification.</p>
-      <p>During development, look-ahead bias was discovered in the ML sleeve. The inflated numbers were discarded. The honest walk-forward figures were kept. <strong>Architectural truth over impressive-looking outputs</strong> — that choice defines how the system is built.</p>
-      <blockquote class="bq">"A lot of people can say they built a strategy. Very few can say they built a system that argues with itself before spending money."</blockquote>
-    </div>
-  </div>
-</section>
+<!-- ══ WHAT IT IS ══ -->
+<section id="what">
+  <div class="slabel">What We Built</div>
+  <div class="what-grid fade-up">
 
-<div class="hr"></div>
-
-<!-- CAPABILITIES -->
-<section id="capabilities" class="caps-section">
-  <div class="slabel">Key Capabilities</div>
-  <div class="caps-grid fade-up">
-
-    <div class="cap-card" onclick="toggleCap(this)">
-      <div class="cap-card-head">
-        <div>
-          <div class="cap-n">01</div>
-          <div class="cap-t">Regime-conditioned decisions</div>
-          <div style="margin-top:0.3rem"><span class="cap-tag">L4 · Live</span></div>
-        </div>
-        <span class="cap-chev">⌄</span>
-      </div>
-      <div class="cap-body"><div class="cap-inner">
-        <p>Every decision — sleeve weights, position sizing, gross exposure — is conditioned on the current inferred market state. Five regimes: <strong>calm_bull, euphoric, stressed, crisis, uncertain.</strong> In stressed or crisis, the orchestrator tilts capital away from equities toward macro and alternatives. The SPY 200-day overlay cuts gross exposure 30% in structurally weak tape.</p>
-        <div class="kv-set">
-          <div class="kv"><span class="kv-k">Method</span><span class="kv-v">Hidden Markov Models + volatility clustering</span></div>
-          <div class="kv"><span class="kv-k">States</span><span class="kv-v">calm_bull · euphoric · stressed · crisis · uncertain</span></div>
-          <div class="kv"><span class="kv-k">Effect</span><span class="kv-v"><strong>Sleeve weights, exposure, desk allocation</strong> all shift with regime</span></div>
-        </div>
-      </div></div>
+    <div class="what-card">
+      <div class="wc-n">The idea</div>
+      <h3 class="wc-h">Most systems act.<br>Ours <em>thinks first.</em></h3>
+      <p class="wc-p">We started with a question: what does a genuinely honest trading system look like? One that doesn&rsquo;t just fire on its own signals &mdash; but actually challenges them, validates them, and knows when to stop. Every design decision in Ascent traces back to that question.</p>
     </div>
 
-    <div class="cap-card" onclick="toggleCap(this)">
-      <div class="cap-card-head">
-        <div>
-          <div class="cap-n">02</div>
-          <div class="cap-t">Pre-trade structured criticism</div>
-          <div style="margin-top:0.3rem"><span class="cap-tag">L9 · Live</span></div>
-        </div>
-        <span class="cap-chev">⌄</span>
-      </div>
-      <div class="cap-body"><div class="cap-inner">
-        <p>Most quant systems treat model output as the final word. Ascent treats it as a <strong>proposal that must survive five distinct analytical voices</strong> before any order is placed. The blind spot detector builds a permanent failure pattern map from all past verdicts and injects it into every future debate.</p>
-        <div class="kv-set">
-          <div class="kv"><span class="kv-k">Agents</span><span class="kv-v">Bull · Bear · Devil's Advocate · Regime Specialist · Quant Sanity</span></div>
-          <div class="kv"><span class="kv-k">Verdicts</span><span class="kv-v"><strong>proceed</strong> · reduce_size · halt_and_review</span></div>
-          <div class="kv"><span class="kv-k">Memory</span><span class="kv-v">Permanent failure pattern map — injected into every future debate</span></div>
-        </div>
-      </div></div>
+    <div class="what-card">
+      <div class="wc-n">The approach</div>
+      <h3 class="wc-h">Built in layers.<br><em>Each one earns its place.</em></h3>
+      <p class="wc-p">Data, signals, portfolio construction, market regime detection, a pre-trade debate, live execution, and a self-learning layer still being built. Each component has a distinct job and clean outputs. We found a flaw in our validation process that made our numbers look better than they were &mdash; we fixed it and kept the honest ones. That standard runs through everything we build.</p>
     </div>
 
-    <div class="cap-card" onclick="toggleCap(this)">
-      <div class="cap-card-head">
-        <div>
-          <div class="cap-n">03</div>
-          <div class="cap-t">Walk-forward epistemic honesty</div>
-          <div style="margin-top:0.3rem"><span class="cap-tag">L6 · Live</span></div>
-        </div>
-        <span class="cap-chev">⌄</span>
-      </div>
-      <div class="cap-body"><div class="cap-inner">
-        <p>At each rebalance date, the system rebuilds the book using only information available up to that point. Look-ahead bias was found during development. Those numbers were thrown out. The honest figures were kept. That is not standard practice in retail quant — most projects leave the bias in and call it a backtest.</p>
-        <div class="kv-set">
-          <div class="kv"><span class="kv-k">Test period</span><span class="kv-v">Jan 2, 2020 &rarr; April 2, 2026</span></div>
-          <div class="kv"><span class="kv-k">Method</span><span class="kv-v">Strict causal rebuild at each rebalance date — no look-ahead</span></div>
-          <div class="kv"><span class="kv-k">Output</span><span class="kv-v">Daily + holdings ledgers · turnover · cost-adjusted returns</span></div>
-        </div>
-      </div></div>
+    <div class="what-card">
+      <div class="wc-n">The core innovation</div>
+      <h3 class="wc-h">It argues with itself<br>before it <em>spends money.</em></h3>
+      <p class="wc-p">Before any trade executes, five AI agents debate it. A judge synthesizes the argument and issues a verdict. The system tracks what it has gotten wrong historically and injects that knowledge into every future debate. It cannot unknow its own mistakes.</p>
     </div>
 
-    <div class="cap-card" onclick="toggleCap(this)">
-      <div class="cap-card-head">
-        <div>
-          <div class="cap-n">04</div>
-          <div class="cap-t">Self-modifying architecture</div>
-          <div style="margin-top:0.3rem"><span class="cap-tag">L10–11 · Building</span></div>
-        </div>
-        <span class="cap-chev">⌄</span>
-      </div>
-      <div class="cap-body"><div class="cap-inner">
-        <p>Ascent maintains a live self-model — <strong>architecture_state.json</strong> — every component, every assumption, every structural change ever made with the reason and outcome. Recurring failure patterns trigger the Hypothesis Engine, which shadow-tests proposals against the live system for 63 days. Old configs are archived, never deleted.</p>
-        <div class="kv-set">
-          <div class="kv"><span class="kv-k">Self-model</span><span class="kv-v">architecture_state.json — live, structured, queryable</span></div>
-          <div class="kv"><span class="kv-k">Trigger</span><span class="kv-v">Failure mode flagged 3+ times in blind spot map</span></div>
-          <div class="kv"><span class="kv-k">Shadow test</span><span class="kv-v">63-day OOS window vs null architecture before any promotion</span></div>
-        </div>
-      </div></div>
+    <div class="what-card">
+      <div class="wc-n">The direction</div>
+      <h3 class="wc-h">A system that learns<br>from <em>being wrong.</em></h3>
+      <p class="wc-p">We&rsquo;re building a layer that lets the system identify its own structural failures, propose architectural changes, test them against the live platform, and integrate them only if the evidence supports it. Every change is logged permanently. The system can explain why it is the way it is.</p>
     </div>
 
   </div>
@@ -423,16 +329,58 @@ footer{background:var(--ink);border-top:1px solid var(--rule);padding:2.8rem 4re
 
 <div class="hr"></div>
 
-<!-- DEBATE -->
+<!-- ══ DEBATE ══ -->
 <section id="debate" class="debate-section">
   <div class="slabel">Debate Layer</div>
-  <p class="debate-lede fade-up">"Most systems treat model output as the final word. Ascent treats it as a proposal."</p>
+
+  <div class="debate-hero fade-up">
+    <div>
+      <h2 class="debate-hero-q">Before every trade,<br>five agents <em>disagree.</em></h2>
+      <p class="debate-hero-p">Most trading systems treat the model&rsquo;s output as a decision. We treat it as a proposal &mdash; one that has to survive a structured argument before anything executes.</p>
+      <p class="debate-hero-p" style="margin-top:1rem">Each agent has a specific role: make the bull case, argue against it, find the thing the model most likely missed, assess whether the current environment supports the trade, and check the mechanics. A judge synthesizes all of it: <strong>proceed, reduce size, or halt.</strong> No verdict, no trade.</p>
+      <p class="debate-hero-p" style="margin-top:1rem">There&rsquo;s also a component we&rsquo;re particularly proud of: a <strong>blind spot detector</strong> that reads every past verdict and finds patterns the system keeps repeating. Those get injected as permanent context into every future debate. The system can&rsquo;t look away from what it&rsquo;s been wrong about.</p>
+    </div>
+    <div>
+      <div style="font-family:var(--mono);font-size:7.5px;letter-spacing:0.24em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:1rem">How a verdict is reached</div>
+      <div style="display:flex;flex-direction:column;gap:1px;border:1px solid var(--rule-b)">
+        <div style="display:grid;grid-template-columns:28px 1fr;gap:0.8rem;align-items:center;padding:0.85rem 1rem;background:var(--surface);border-left:2px solid rgba(201,169,110,0.15)">
+          <span style="font-size:1rem;color:var(--gold-dim)">&#9650;</span>
+          <div><div style="font-size:0.85rem;font-weight:400;color:var(--text)">Bull makes the case</div><div style="font-family:var(--mono);font-size:7px;color:var(--text-dim);letter-spacing:0.1em;text-transform:uppercase">Why execute, why now</div></div>
+        </div>
+        <div style="display:grid;grid-template-columns:28px 1fr;gap:0.8rem;align-items:center;padding:0.85rem 1rem;background:var(--surface);border-left:2px solid rgba(201,169,110,0.15)">
+          <span style="font-size:1rem;color:var(--gold-dim)">&#9661;</span>
+          <div><div style="font-size:0.85rem;font-weight:400;color:var(--text)">Bear pushes back</div><div style="font-family:var(--mono);font-size:7px;color:var(--text-dim);letter-spacing:0.1em;text-transform:uppercase">What could go wrong</div></div>
+        </div>
+        <div style="display:grid;grid-template-columns:28px 1fr;gap:0.8rem;align-items:center;padding:0.85rem 1rem;background:var(--surface);border-left:2px solid rgba(201,169,110,0.15)">
+          <span style="font-size:1rem;color:var(--gold-dim)">&#9672;</span>
+          <div><div style="font-size:0.85rem;font-weight:400;color:var(--text)">Devil&rsquo;s Advocate</div><div style="font-family:var(--mono);font-size:7px;color:var(--text-dim);letter-spacing:0.1em;text-transform:uppercase">The blind spot in the model</div></div>
+        </div>
+        <div style="display:grid;grid-template-columns:28px 1fr;gap:0.8rem;align-items:center;padding:0.85rem 1rem;background:var(--surface);border-left:2px solid rgba(201,169,110,0.15)">
+          <span style="font-size:1rem;color:var(--gold-dim)">&#9678;</span>
+          <div><div style="font-size:0.85rem;font-weight:400;color:var(--text)">Regime Specialist</div><div style="font-family:var(--mono);font-size:7px;color:var(--text-dim);letter-spacing:0.1em;text-transform:uppercase">Is the market right for this?</div></div>
+        </div>
+        <div style="display:grid;grid-template-columns:28px 1fr;gap:0.8rem;align-items:center;padding:0.85rem 1rem;background:var(--surface);border-left:2px solid rgba(201,169,110,0.15)">
+          <span style="font-size:1rem;color:var(--gold-dim)">&#8801;</span>
+          <div><div style="font-size:0.85rem;font-weight:400;color:var(--text)">Quant Sanity</div><div style="font-family:var(--mono);font-size:7px;color:var(--text-dim);letter-spacing:0.1em;text-transform:uppercase">Do the mechanics hold up?</div></div>
+        </div>
+        <div style="padding:0.85rem 1rem;background:var(--surface-2);border-top:1px solid var(--rule-b);display:flex;align-items:center;justify-content:space-between">
+          <span style="font-family:var(--mono);font-size:7.5px;letter-spacing:0.2em;color:var(--gold-dim);text-transform:uppercase">Judge verdict</span>
+          <div style="display:flex;gap:0.4rem">
+            <span style="font-family:var(--mono);font-size:7px;letter-spacing:0.1em;padding:0.22rem 0.6rem;border:1px solid var(--gold-dim);color:var(--gold);background:rgba(201,169,110,0.07);text-transform:uppercase">Proceed</span>
+            <span style="font-family:var(--mono);font-size:7px;letter-spacing:0.1em;padding:0.22rem 0.6rem;border:1px solid var(--rule-b);color:var(--text-dim);text-transform:uppercase">Reduce</span>
+            <span style="font-family:var(--mono);font-size:7px;letter-spacing:0.1em;padding:0.22rem 0.6rem;border:1px solid var(--rule-b);color:var(--text-dim);text-transform:uppercase">Halt</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="agents-row fade-up" id="agentGrid">
-    <div class="ac" onclick="selectAgent(this,0)"><span class="ag-g">&#9650;</span><div class="ag-n">Bull Analyst</div><div class="ag-r">Makes the best case for execution</div><div class="ag-h">Click to expand</div></div>
-    <div class="ac" onclick="selectAgent(this,1)"><span class="ag-g">&#9661;</span><div class="ag-n">Bear Analyst</div><div class="ag-r">Argues for less risk or delay</div><div class="ag-h">Click to expand</div></div>
-    <div class="ac" onclick="selectAgent(this,2)"><span class="ag-g">&#9672;</span><div class="ag-n">Devil's Advocate</div><div class="ag-r">Finds the most dangerous blind spot</div><div class="ag-h">Click to expand</div></div>
-    <div class="ac" onclick="selectAgent(this,3)"><span class="ag-g">&#9678;</span><div class="ag-n">Regime Specialist</div><div class="ag-r">Contextualizes within market state</div><div class="ag-h">Click to expand</div></div>
-    <div class="ac" onclick="selectAgent(this,4)"><span class="ag-g">&#8801;</span><div class="ag-n">Quant Sanity</div><div class="ag-r">Validates constraints and rules</div><div class="ag-h">Click to expand</div></div>
+    <div class="ac" onclick="sA(this,0)"><span class="ag-g">&#9650;</span><div class="ag-n">Bull Analyst</div><div class="ag-r">Makes the strongest case for the trade</div><div class="ag-h">Click to expand</div></div>
+    <div class="ac" onclick="sA(this,1)"><span class="ag-g">&#9661;</span><div class="ag-n">Bear Analyst</div><div class="ag-r">Argues against it or for caution</div><div class="ag-h">Click to expand</div></div>
+    <div class="ac" onclick="sA(this,2)"><span class="ag-g">&#9672;</span><div class="ag-n">Devil&rsquo;s Advocate</div><div class="ag-r">Finds what the model probably missed</div><div class="ag-h">Click to expand</div></div>
+    <div class="ac" onclick="sA(this,3)"><span class="ag-g">&#9678;</span><div class="ag-n">Regime Specialist</div><div class="ag-r">Is this the right environment?</div><div class="ag-h">Click to expand</div></div>
+    <div class="ac" onclick="sA(this,4)"><span class="ag-g">&#8801;</span><div class="ag-n">Quant Sanity</div><div class="ag-r">Checks the mechanics</div><div class="ag-h">Click to expand</div></div>
   </div>
   <div class="agent-panel" id="agentPanel"><div class="ap-in" id="agentPanelIn"></div></div>
   <div class="verdict-row fade-up">
@@ -443,36 +391,101 @@ footer{background:var(--ink);border-top:1px solid var(--rule);padding:2.8rem 4re
 
 <div class="hr"></div>
 
-<!-- NEUROPLASTICITY -->
+<!-- ══ NEUROPLASTICITY ══ -->
 <section id="neuroplasticity" class="neuro-section">
-  <div class="slabel">Neuroplasticity Layer</div>
-  <div class="neuro-grid fade-up">
+  <div class="slabel">How It Learns</div>
+
+  <div class="neuro-hero fade-up">
     <div>
-      <h2 class="neuro-h2">A brain that<br>rewires itself<br>when it is <em>wrong.</em></h2>
-      <div class="neuro-body">
-        <p>Every quant fund shares the same problem: a human writes the strategy, the strategy runs, the strategy gets tuned. The gears are fixed. Beliefs about how markets work get weighted differently — but they never get replaced by something structurally new.</p>
-        <p>Ascent maintains a live self-model. Each alpha sleeve carries an explicit, falsifiable belief the system can test and reject. When a failure mode recurs, the Hypothesis Engine proposes a structural change, shadow-tests it for 63 days in parallel, and promotes it <strong>only if the edge holds in real time.</strong></p>
-        <p>Every change is written to R2R with its full causal chain. No institutional fund can replicate this — compliance, org incentives, and legacy infrastructure make self-modifying architecture impossible at scale. Ascent is building it before there is anything to protect.</p>
-      </div>
+      <h2 class="neuro-hero-q">What if the system<br>could <em>fix itself?</em></h2>
+      <p class="neuro-hero-p">Most trading systems have a fixed architecture. Someone writes the logic, it runs, they tune it. The assumptions baked into the code never really change &mdash; they just get weighted differently.</p>
+      <p class="neuro-hero-p" style="margin-top:1rem">We&rsquo;re building something different. Ascent keeps a live record of every assumption it&rsquo;s making about markets &mdash; stated explicitly, so they can be tested. When a failure pattern shows up repeatedly, the system proposes a structural change, tests it in parallel with the live platform, and only integrates it <strong>if the evidence supports it.</strong> Every decision is logged permanently.</p>
+      <p class="neuro-hero-p" style="margin-top:1rem">This layer is still in development. We&rsquo;re being honest about that. But the design is real, and the direction is clear.</p>
     </div>
     <div>
-      <div class="loop-lbl">Daily operational loop</div>
-      <div class="loop-tbl">
-        <div class="loop-r"><div class="loop-t">7:45 PM</div><div class="loop-a">Agents run, weights merged, <strong>skill scores updated</strong></div></div>
-        <div class="loop-r"><div class="loop-t">7:46 PM</div><div class="loop-a"><strong>Blind spot detector</strong> scans all past verdicts</div></div>
-        <div class="loop-r"><div class="loop-t">7:47 PM</div><div class="loop-a">Hypothesis engine reads map — <strong>generates proposals</strong> if thresholds met</div></div>
-        <div class="loop-r"><div class="loop-t">7:48 PM</div><div class="loop-a">Debate fires with blind spot context injected</div></div>
-        <div class="loop-r"><div class="loop-t">7:49 PM</div><div class="loop-a">Verdict gates execution — <strong>proceed / reduce / halt</strong></div></div>
-        <div class="loop-r"><div class="loop-t">Overnight</div><div class="loop-a">Hypothesis tester runs proposals — <strong>shadow candidates identified</strong></div></div>
-        <div class="loop-r"><div class="loop-t">On promo</div><div class="loop-a"><strong>architecture_state.json updated</strong> — system rewires itself, R2R ingested</div></div>
+      <div style="font-family:var(--mono);font-size:7.5px;letter-spacing:0.24em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:1rem">The learning cycle</div>
+      <div style="display:flex;flex-direction:column;gap:1px;border:1px solid var(--rule-b)">
+        <div style="padding:1rem 1.1rem;background:var(--ink-2);border-left:2px solid rgba(201,169,110,0.2)"><div style="font-size:0.88rem;font-weight:400;color:#EDE8DF;margin-bottom:0.2rem">Failure is detected</div><div style="font-size:0.8rem;font-weight:300;color:var(--text-dim);line-height:1.6">The blind spot detector identifies a pattern the system keeps repeating across past decisions.</div></div>
+        <div style="padding:1rem 1.1rem;background:var(--ink-2);border-left:2px solid rgba(201,169,110,0.3)"><div style="font-size:0.88rem;font-weight:400;color:#EDE8DF;margin-bottom:0.2rem">A change is proposed</div><div style="font-size:0.8rem;font-weight:300;color:var(--text-dim);line-height:1.6">The system generates a specific structural proposal to address the failure. No guessing &mdash; a testable hypothesis.</div></div>
+        <div style="padding:1rem 1.1rem;background:var(--ink-2);border-left:2px solid rgba(201,169,110,0.45)"><div style="font-size:0.88rem;font-weight:400;color:#EDE8DF;margin-bottom:0.2rem">It runs in the shadow</div><div style="font-size:0.8rem;font-weight:300;color:var(--text-dim);line-height:1.6">The proposed change runs in parallel with the live system &mdash; seeing the same data, generating its own output, but not affecting any real decisions.</div></div>
+        <div style="padding:1rem 1.1rem;background:var(--surface);border-left:2px solid var(--gold-dim)"><div style="font-size:0.88rem;font-weight:400;color:#EDE8DF;margin-bottom:0.2rem">Evidence decides</div><div style="font-size:0.8rem;font-weight:300;color:var(--text-dim);line-height:1.6">Only if the shadow results support the change does it get integrated. Every outcome is logged permanently &mdash; accepted or rejected.</div></div>
       </div>
+    </div>
+  </div>
+
+  <div class="principles fade-up d1">
+    <div class="pr">
+      <div class="pr-n">Principle 01</div>
+      <div class="pr-t">Say what you believe, so you can be wrong</div>
+      <div class="pr-d">Every assumption the system makes about market behavior is written out explicitly &mdash; not buried in code. If it&rsquo;s stated, it can be tested. If it keeps failing, it can be replaced.</div>
+    </div>
+    <div class="pr">
+      <div class="pr-n">Principle 02</div>
+      <div class="pr-t">Changes have to earn their place</div>
+      <div class="pr-d">No structural change is promoted until it proves itself against the live system in a shadow testing period. The burden of proof is on the new idea, not the existing one.</div>
+    </div>
+    <div class="pr">
+      <div class="pr-n">Principle 03</div>
+      <div class="pr-t">Every decision gets a permanent record</div>
+      <div class="pr-d">Every architectural change is logged: what triggered it, what was changed, and what happened. The system can explain why it is the way it is, all the way back to the beginning.</div>
+    </div>
+  </div>
+
+  <div style="margin-top:3rem" class="fade-up d2">
+    <div class="loop-lbl">What runs every day</div>
+    <div class="loop-tbl">
+      <div class="loop-r"><div class="loop-t">Evening</div><div class="loop-a">All desks run. Outputs are merged. Recent performance is tracked per desk.</div></div>
+      <div class="loop-r"><div class="loop-t">Then</div><div class="loop-a"><strong>Blind spot detector</strong> reviews the full history of past decisions &mdash; looking for patterns the system keeps repeating.</div></div>
+      <div class="loop-r"><div class="loop-t">Then</div><div class="loop-a">If a failure pattern crosses a threshold, a <strong>structural change is proposed</strong> and queued for shadow testing.</div></div>
+      <div class="loop-r"><div class="loop-t">Then</div><div class="loop-a">Pre-trade debate fires. Current blind spot map is injected as context. Verdict gates execution.</div></div>
+      <div class="loop-r"><div class="loop-t">Overnight</div><div class="loop-a">Proposed changes run in a shadow environment alongside the live system. Results are compared.</div></div>
+      <div class="loop-r"><div class="loop-t">On promo</div><div class="loop-a">If the evidence supports the change, it&rsquo;s integrated. <strong>The full record is logged permanently.</strong></div></div>
     </div>
   </div>
 </section>
 
 <div class="hr"></div>
 
-<!-- FOUNDERS -->
+<!-- ══ ARCHITECTURE (TECHNICAL) ══ -->
+<section id="layers" class="layers-section">
+  <div class="slabel">System Architecture</div>
+  <p class="layers-intro fade-up">For those who want to go deeper. Each layer runs independently, with defined inputs and outputs. Click any to expand.</p>
+  <div class="layer-stack fade-up d1">
+    <div class="lr" onclick="tL(this,'11')"><span class="lr-n">L11</span><span class="lr-name">Hypothesis Memory</span><span class="lr-b bld">Building</span></div>
+    <div class="drawer" id="ld-11"><div class="di"><div class="di-txt">Every structural change the system makes to its own architecture is stored permanently &mdash; what triggered it, what was changed, and what happened afterward. The system can answer why it is the way it is, all the way back to the beginning.</div></div></div>
+
+    <div class="lr" onclick="tL(this,'10')"><span class="lr-n">L10</span><span class="lr-name">Hypothesis Engine</span><span class="lr-b bld">Building</span></div>
+    <div class="drawer" id="ld-10"><div class="di"><div class="di-txt">When a failure pattern crosses a threshold in the blind spot map, this layer generates a proposed architectural change, routes it to shadow testing, and only promotes it if the out-of-sample evidence supports it. <strong>The promotion threshold scales with the size of the change.</strong></div></div></div>
+
+    <div class="lr" onclick="tL(this,'9')"><span class="lr-n">L9</span><span class="lr-name">Debate + Blind Spot Detector</span><span class="lr-b live">Live</span></div>
+    <div class="drawer" id="ld-9"><div class="di"><div class="di-txt">Five agents, one judge, three possible verdicts. A separate process continuously scans the full history of past verdicts to identify systematic failure patterns and injects them as permanent context into every future debate session.</div></div></div>
+
+    <div class="lr" onclick="tL(this,'8')"><span class="lr-n">L8</span><span class="lr-name">Multi-Asset Orchestrator</span><span class="lr-b live">Live</span></div>
+    <div class="drawer" id="ld-8"><div class="di"><div class="di-txt">Merges outputs from all four specialist desks into a single portfolio decision. Capital allocation across desks adjusts dynamically with the current market regime &mdash; not a static split.</div></div></div>
+
+    <div class="lr" onclick="tL(this,'7')"><span class="lr-n">L7</span><span class="lr-name">Specialist Desks (US / Macro / Intl / Alt)</span><span class="lr-b live">Live</span></div>
+    <div class="drawer" id="ld-7"><div class="di"><div class="di-txt">Four desks, each with its own signal logic, risk constraints, and asset universe. US equities runs the full research pipeline. Macro covers rate-sensitive assets. International covers developed and emerging markets. Alternatives covers real assets and vol-adjacent instruments.</div></div></div>
+
+    <div class="lr" onclick="tL(this,'56')"><span class="lr-n">L5&ndash;6</span><span class="lr-name">Execution + Risk Controls</span><span class="lr-b live">Live</span></div>
+    <div class="drawer" id="ld-56"><div class="di"><div class="di-txt">Runs on a daily automated schedule. Converts target weights into orders. A drawdown-triggered kill switch can halt all execution if risk conditions are breached. Every run is logged in full.</div></div></div>
+
+    <div class="lr" onclick="tL(this,'4')"><span class="lr-n">L4</span><span class="lr-name">Market Regime Detection</span><span class="lr-b live">Live</span></div>
+    <div class="drawer" id="ld-4"><div class="di"><div class="di-txt">Continuously infers the current market environment and translates it into a posture label every downstream layer can act on. Portfolio construction, desk allocation, and debate context all shift based on the current regime.</div></div></div>
+
+    <div class="lr" onclick="tL(this,'3')"><span class="lr-n">L3</span><span class="lr-name">Portfolio Construction</span><span class="lr-b live">Live</span></div>
+    <div class="drawer" id="ld-3"><div class="di"><div class="di-txt">Converts alpha scores into actual position sizes under diversification and concentration constraints. Every rebalance writes a full ledger &mdash; not just summary metrics &mdash; so post-hoc inspection is always possible.</div></div></div>
+
+    <div class="lr" onclick="tL(this,'2')"><span class="lr-n">L2</span><span class="lr-name">Signal Generation</span><span class="lr-b live">Live</span></div>
+    <div class="drawer" id="ld-2"><div class="di"><div class="di-txt">Multiple theories about market behavior run simultaneously and combine into a composite signal. Each theory is stated as an explicit, testable hypothesis &mdash; so if it keeps being wrong, the debate and hypothesis layers can identify and address it.</div></div></div>
+
+    <div class="lr" onclick="tL(this,'1')"><span class="lr-n">L1</span><span class="lr-name">Data + Features</span><span class="lr-b live">Live</span></div>
+    <div class="drawer" id="ld-1"><div class="di"><div class="di-txt">Price and macro data with point-in-time joins to prevent look-ahead contamination. Historical universe logic accounts for the fact that the set of securities that existed at any given date differs from what exists today &mdash; a subtle issue most backtests quietly ignore.</div></div></div>
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- ══ FOUNDERS ══ -->
 <section id="founders" class="founders-section">
   <div class="slabel">Team</div>
   <div class="founders-grid fade-up">
@@ -494,35 +507,35 @@ footer{background:var(--ink);border-top:1px solid var(--rule);padding:2.8rem 4re
 <footer>
   <span class="f-wm">Ascent Capital</span>
   <div class="f-meta">
-    <span><b>Status</b>Paper trading &middot; Apr 2026</span>
-    <span><b>Layers</b>9 live &middot; 2 building</span>
-    <span><b>Desks</b>US &middot; Macro &middot; Intl &middot; Alt</span>
-    <span><b>Execution</b>Alpaca &middot; Automated daily</span>
+    <span><b>Status</b>Paper trading &middot; 2026</span>
+    <span><b>Founded</b>2025</span>
+    <span><b>Coverage</b>US &middot; Macro &middot; Intl &middot; Alt</span>
+    <span><b>Execution</b>Automated daily</span>
   </div>
-  <div class="f-disc">Independent research platform &middot; Not investment advice &middot; All figures reflect walk-forward out-of-sample results</div>
+  <div class="f-disc">Independent research platform &middot; Not investment advice &middot; All figures reflect out-of-sample results</div>
 </footer>
 
 <script>
 var agents=[
-  {g:"\u25b2",n:"Bull Analyst",s:"The case for execution",
-   b:"<p>Makes the strongest possible case for executing the proposed rebalance at full size. By requiring the bull case to be articulated explicitly, the system ensures every rebalance has a clear, defensible rationale before the other agents challenge it. This is not cheerleading \u2014 it is a <strong>structured forcing function.</strong></p>",
-   q:["What signals most clearly support this trade?","What is the expected edge and why is now the right time?","Which regime conditions favor this allocation?","What is the risk/reward given current book composition?"]},
-  {g:"\u25bd",n:"Bear Analyst",s:"The case for caution",
-   b:"<p>Argues for less risk or outright delay. Looks for reasons the proposed rebalance could be wrong \u2014 adverse macro conditions, elevated volatility, positioning that increases tail risk, or signals statistically weak in the current regime. Can result in a <strong>reduce_size recommendation</strong> or flag for halt_and_review.</p>",
-   q:["What macro or regime conditions cut against this trade?","Where are the signals weakest or most uncertain?","What is the downside if the regime shifts during the hold period?","Are there concentration or correlation risks in the current book?"]},
-  {g:"\u25c8",n:"Devil\u2019s Advocate",s:"The single most dangerous blind spot",
-   b:"<p>One job: find the single most dangerous thing the quant stack might have missed. Fed the <strong>blind spot detector\u2019s failure pattern map directly</strong> \u2014 it knows exactly what the system has gotten wrong before, and probes whether those same failure modes are active in the current proposal. The system criticizing itself using its own history.</p>",
-   q:["What is the one assumption this trade depends on that might be wrong?","Has the system been wrong in exactly this way before?","What would have to be true for this trade to fail badly?","Is there a known blind spot pattern active in the current setup?"]},
-  {g:"\u25ce",n:"Regime Specialist",s:"Market state context",
-   b:"<p>Contextualizes the proposed trade within the current inferred market state. Reads HMM output, posture label, and historical analogues from R2R. Particularly important during <strong>regime transitions</strong> \u2014 where proposed weights may be right for where the market has been, not where it is going.</p>",
-   q:["What is the current regime and what does it imply for this allocation?","Is the system in a transition state? Which direction?","What did similar past regimes produce for this sleeve combination?","Does the proposed book match the current posture label?"]},
-  {g:"\u2261",n:"Quant Sanity",s:"Constraints and portfolio rules",
-   b:"<p>Validates that proposed weights satisfy portfolio construction rules \u2014 max position bounds, sector concentration limits, turnover constraints, gross exposure limits \u2014 checked mechanically before execution. This agent exists because <strong>theoretical elegance fails at the edge cases.</strong> Earlier audits found bugs where missing sector labels collapsed the portfolio silently.</p>",
-   q:["Are all position weights within configured min/max bounds?","Are sector concentration limits respected?","Does gross exposure satisfy the SPY overlay threshold?","Is turnover within acceptable bounds for this rebalance frequency?"]}
+  {g:"\u25b2",n:"Bull Analyst",s:"Makes the strongest case for the trade",
+   b:"<p>Before every rebalance, this agent articulates the strongest possible argument for executing. Not optimism &mdash; a forcing function. By requiring the bull case to be stated explicitly, the system ensures there&rsquo;s a real reason to act before the other agents challenge it.</p>",
+   q:["What signals most clearly support this trade?","What is the expected edge and why now?","Which market conditions favor this position?","What does the risk/reward look like in the current book?"]},
+  {g:"\u25bd",n:"Bear Analyst",s:"Argues against it or for caution",
+   b:"<p>Argues for less risk or outright delay. Looks for everything that could make the trade wrong &mdash; conditions that cut against it, signals that are weak in the current environment, tail risks that might be underweighted. Can push for a <strong>reduced position</strong> or flag the trade for halt.</p>",
+   q:["What conditions cut against this trade?","Where are the signals most uncertain?","What\u2019s the downside if conditions shift mid-hold?","Are there concentration risks in the current book?"]},
+  {g:"\u25c8",n:"Devil\u2019s Advocate",s:"Finds what the model probably missed",
+   b:"<p>One job: find the single most important thing the rest of the system might have missed. Given the <strong>full history of the system\u2019s past mistakes</strong>, this agent specifically looks for whether any of those patterns are active in the current proposal. The system holding up a mirror to itself.</p>",
+   q:["What\u2019s the one assumption this trade depends on that could be wrong?","Has the system made a similar error before?","What would have to be true for this to go badly?","Is a known failure pattern active right now?"]},
+  {g:"\u25ce",n:"Regime Specialist",s:"Is this the right environment for this trade?",
+   b:"<p>Evaluates the trade against the current inferred market state. Particularly important during transitions &mdash; when the environment is shifting, the proposed weights might be calibrated to where things were, not where they\u2019re going. This agent asks whether the timing is right, not just the trade.</p>",
+   q:["What is the current market environment and what does it imply?","Is the system in a transition period?","What happened in past periods with similar conditions?","Does the proposed portfolio match the current environment?"]},
+  {g:"\u2261",n:"Quant Sanity",s:"Checks that the mechanics actually work",
+   b:"<p>Verifies the proposed trade satisfies the system\u2019s own rules: position limits, diversification constraints, exposure controls. This agent exists because elegant theory breaks down at implementation. Earlier in development, we found constraints that weren\u2019t being enforced correctly. This is the guard against that happening again.</p>",
+   q:["Are position weights within configured limits?","Are diversification rules respected?","Does gross exposure satisfy current risk controls?","Is the proposed rebalance mechanically sound?"]}
 ];
 
 var cur=-1;
-function selectAgent(el,i){
+function sA(el,i){
   var panel=document.getElementById("agentPanel");
   var inner=document.getElementById("agentPanelIn");
   var cards=document.querySelectorAll(".ac");
@@ -530,23 +543,17 @@ function selectAgent(el,i){
   cur=i;var a=agents[i];
   cards.forEach(function(c){c.classList.remove("sel")});
   el.classList.add("sel");
-  inner.innerHTML='<div class="ap-head"><span class="ap-g">'+a.g+'</span><div><div class="ap-name">'+a.n+'</div><div class="ap-sub">'+a.s+'</div></div></div><div class="ap-body">'+a.b+'</div><div class="ap-qs"><div class="ap-qs-lbl">Questions it asks before every rebalance</div><ul>'+a.q.map(function(x){return"<li>"+x+"</li>"}).join("")+"</ul></div>";
+  inner.innerHTML='<div class="ap-head"><span class="ap-g">'+a.g+'</span><div><div class="ap-name">'+a.n+'</div><div class="ap-sub">'+a.s+'</div></div></div><div class="ap-body">'+a.b+'</div><div class="ap-qs"><div class="ap-qs-lbl">What it asks before every rebalance</div><ul>'+a.q.map(function(x){return"<li>"+x+"</li>"}).join("")+"</ul></div>";
   panel.classList.add("open");
   setTimeout(function(){panel.scrollIntoView({behavior:"smooth",block:"nearest"})},60);
 }
 
-function toggleLayer(el,id){
+function tL(el,id){
   var d=document.getElementById("ld-"+id);
   var isOpen=d.classList.contains("open");
   document.querySelectorAll(".drawer").forEach(function(x){x.classList.remove("open")});
   document.querySelectorAll(".lr").forEach(function(x){x.classList.remove("open")});
   if(!isOpen){d.classList.add("open");el.classList.add("open");}
-}
-
-function toggleCap(el){
-  var isOpen=el.classList.contains("open");
-  document.querySelectorAll(".cap-card").forEach(function(x){x.classList.remove("open")});
-  if(!isOpen)el.classList.add("open");
 }
 
 function navTo(id){
