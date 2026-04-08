@@ -190,6 +190,22 @@ section{padding:5.5rem 4rem;position:relative;z-index:1}
 
 /* ── FOUNDERS ── */
 .founders-section{background:var(--ink)}
+.founders-layout{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start}
+.founders-left{}
+.founders-statement{font-size:clamp(1.5rem,2.8vw,2.2rem);font-weight:300;line-height:1.3;color:#EDE8DF;letter-spacing:-0.01em;margin-bottom:2rem}
+.founders-statement em{font-style:italic;color:var(--gold)}
+.founders-context{font-size:0.97rem;font-weight:300;color:var(--text-dim);line-height:1.94}
+.founders-context p+p{margin-top:1.1rem}
+.founders-context strong{color:var(--text);font-weight:400}
+.founders-right{display:flex;flex-direction:column;gap:1px}
+.fc{background:var(--surface);border:1px solid var(--rule-b);padding:2.2rem 2rem;position:relative;overflow:hidden;transition:background 0.22s;margin-bottom:1px}
+.fc:last-child{margin-bottom:0}
+.fc::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--gold-dim),transparent);opacity:0;transition:opacity 0.25s}
+.fc:hover{background:var(--surface-2)}
+.fc:hover::before{opacity:1}
+.fc-role{font-family:var(--mono);font-size:7.5px;letter-spacing:0.26em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:0.7rem}
+.fc-name{font-size:1.7rem;font-weight:300;color:#EDE8DF;letter-spacing:-0.01em;line-height:1.1;margin-bottom:0.6rem}
+.fc-school{font-family:var(--mono);font-size:7px;letter-spacing:0.18em;color:var(--text-dim);text-transform:uppercase}
 .founders-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule-b);border:1px solid var(--rule-b);max-width:820px}
 .fc{background:var(--surface);padding:2.6rem 2.4rem;position:relative;overflow:hidden;transition:background 0.22s}
 .fc::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--gold-dim),transparent);opacity:0;transition:opacity 0.25s}
@@ -223,7 +239,7 @@ footer{background:var(--ink);border-top:1px solid var(--rule);padding:2.8rem 4re
   .debate-hero,.neuro-hero{grid-template-columns:1fr;gap:2.5rem}
   .agents-row{grid-template-columns:repeat(3,1fr)}
   .principles{grid-template-columns:1fr}
-  .founders-grid{grid-template-columns:1fr;max-width:none}
+  .founders-layout{grid-template-columns:1fr;gap:3rem}
   .hero-bottom{gap:1.5rem}
   footer{flex-direction:column;align-items:flex-start;gap:1.5rem;padding:2rem 1.4rem}
   .f-disc{text-align:left;max-width:none}
@@ -487,18 +503,31 @@ footer{background:var(--ink);border-top:1px solid var(--rule);padding:2.8rem 4re
 
 <!-- ══ FOUNDERS ══ -->
 <section id="founders" class="founders-section">
-  <div class="slabel">Team</div>
-  <div class="founders-grid fade-up">
-    <div class="fc">
-      <div class="fc-role">CEO &amp; Co-Founder</div>
-      <div class="fc-name">Scott Dong</div>
-      <div class="fc-school">Villanova Preparatory School &middot; Class of 2027</div>
+  <div class="slabel">The People Behind It</div>
+  <div class="founders-layout fade-up">
+
+    <div class="founders-left">
+      <p class="founders-statement">We started with a question. We couldn&rsquo;t stop until we&rsquo;d <em>built the answer.</em></p>
+      <div class="founders-context">
+        <p>Ascent began as an obsession: what does a genuinely rigorous trading system actually look like? Not a backtest with flattering numbers &mdash; something with real standards. A system that questions its own decisions before acting, and is designed to learn from being wrong.</p>
+        <p>At one point during development, we found a flaw in our validation process that made the performance numbers look significantly better than they were. We corrected it and kept the honest figures. That instinct &mdash; toward the accurate version rather than the impressive-looking one &mdash; runs through every decision we&rsquo;ve made building this.</p>
+        <p>We&rsquo;re early. We know that. But the system is real, the architecture is serious, and we&rsquo;re not done.</p>
+      </div>
     </div>
-    <div class="fc">
-      <div class="fc-role">CTO &amp; Co-Founder</div>
-      <div class="fc-name">Hakob Alakhverdyan</div>
-      <div class="fc-school">Villanova Preparatory School &middot; Class of 2027</div>
+
+    <div class="founders-right">
+      <div class="fc">
+        <div class="fc-role">CEO &amp; Co-Founder</div>
+        <div class="fc-name">Scott Dong</div>
+        <div class="fc-school">Villanova Preparatory School &middot; Class of 2027</div>
+      </div>
+      <div class="fc">
+        <div class="fc-role">CTO &amp; Co-Founder</div>
+        <div class="fc-name">Hakob Alakhverdyan</div>
+        <div class="fc-school">Villanova Preparatory School &middot; Class of 2027</div>
+      </div>
     </div>
+
   </div>
 </section>
 
